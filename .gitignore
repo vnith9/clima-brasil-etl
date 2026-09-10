@@ -1,0 +1,8 @@
+# Raw Data
+raw_data.json
+
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
