@@ -2,10 +2,9 @@
 
 import requests
 import json
+import os
 
-def get_weather_data():
-
-    capitais = {
+CAPITAIS = {
     "Macapá":           (0.03,   -51.07),
     "Boa Vista":        (2.82,   -60.67),
     "Belém":            (-1.45,  -48.50),
@@ -35,10 +34,12 @@ def get_weather_data():
     "Porto Alegre":     (-30.03, -51.23),
 }
 
+def get_weather_data():
 
-    latitudes = [c[0] for c in capitais.values()]
 
-    longitudes = [c[1] for c in capitais.values()]
+    latitudes = [c[0] for c in CAPITAIS.values()]
+
+    longitudes = [c[1] for c in CAPITAIS.values()]
 
     url = "https://archive-api.open-meteo.com/v1/archive"
 
@@ -89,10 +90,17 @@ def save_json_file(raw_data):
 
 
 if __name__ == "__main__":
-    raw_data = get_weather_data()
-    if raw_data is None:
-        print("Abortando: nenhum dado para salvar.")
+
+    if os.path.exists("raw_data.json"):
+        print("Um arquivo json já existe.")
 
     else:
-        if not save_json_file(raw_data):
-            print("Abortando: erro ao salvar.")
+        raw_data = get_weather_data()
+
+        if raw_data is None:
+            print("Abortando: nenhum dado para salvar.")
+        else:
+            if not save_json_file(raw_data):
+                print("Abortando: erro ao salvar.")
+            else:
+                print("Dados salvos com sucesso!")

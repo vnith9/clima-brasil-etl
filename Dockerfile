@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 #Executa o pipeline
-CMD ["python", "main.py"]
+CMD ["sleep", "infinity"]
