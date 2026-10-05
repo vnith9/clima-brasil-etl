@@ -61,18 +61,23 @@ def get_weather_data():
     
     except requests.exceptions.ConnectionError:
         print("Ocorreu um erro na conexão!")
+        raise
 
     except requests.exceptions.HTTPError:
         print("Ocorreu um erro HTTP!")
+        raise
 
     except requests.exceptions.TooManyRedirects:
         print("O número máximo de redirecionamentos foi excedido!")
+        raise
 
     except requests.exceptions.Timeout:
         print("A requisição demorou demais!")
+        raise
 
     except requests.exceptions.JSONDecodeError:
         print("Não foi possivel decodificar o texto para JSON!")
+        raise
 
 def save_json_file(raw_data):
     try:
@@ -82,11 +87,11 @@ def save_json_file(raw_data):
 
     except PermissionError:
         print("Sem permissões do sistema, para realizar essa ação!")
-        return False
+        raise
 
     except OSError as e:
         print(f"Erro ao salvar o arquivo! {e}")
-        return False
+        raise
 
 
 if __name__ == "__main__":

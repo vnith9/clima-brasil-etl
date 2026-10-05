@@ -11,15 +11,15 @@ def abrir_arquivo():
     
     except PermissionError:
             print("Sem permissões do sistema, para realizar essa ação!")
-            return False
+            raise
     
     except OSError as e:
             print(f"Erro ao abrir o arquivo! {e}")
-            return False
+            raise
 
     except json.JSONDecodeError as e:
           print(f"Erro ao ler arquivo json! {e}")
-          return False
+          raise
 
 
 def normalizar_dados(raw_data):
@@ -32,34 +32,43 @@ def filtrar_colunas(df):
       return colunas
 
 def transformar_colunas(df, colunas):
-      df_transformado = df[colunas + ["cidade"]]
-      df_transformado = df_transformado.explode(colunas, ignore_index=True)
-      df_transformado = df_transformado.rename(columns={
+      df_clima = df[colunas + ["cidade"]]
+      df_cidade = df[["cidade", "latitude", "longitude"]]
+      df_clima = df_clima.explode(colunas, ignore_index=True)
+      df_clima = df_clima.rename(columns={
             "daily.time": "data",
             "daily.temperature_2m_mean": "temperatura_media_c",
             "daily.precipitation_sum": "precipitacao_mm",
             "daily.daylight_duration": "duracao_luz_dia_h",
             "daily.shortwave_radiation_sum": "radiacao_solar_mj_m2"
       })
-      df_transformado["duracao_luz_dia_h"] = (df_transformado["duracao_luz_dia_h"] / 3600).round(2)
-      df_transformado["data"] = pd.to_datetime(df_transformado["data"])
-      colunas_numericas = ["temperatura_media_c", "precipitacao_mm", "duracao_luz_dia_h", "radiacao_solar_mj_m2"]
-      df_transformado[colunas_numericas] = df_transformado[colunas_numericas].apply(pd.to_numeric)
+      df_clima["duracao_luz_dia_h"] = (df_clima["duracao_luz_dia_h"] / 3600).round(2)
+      df_clima["data"] = pd.to_datetime(df_clima["data"])
+      colunas_numeric = ["temperatura_media_c", "precipitacao_mm", "duracao_luz_dia_h", "radiacao_solar_mj_m2"]
+      df_clima[colunas_numeric] = df_clima[colunas_numeric].apply(pd.to_numeric)
+      return df_clima, df_cidade
 
-      return df_transformado
+
+def transformar():
+      raw_data = abrir_arquivo()
+
+      df = normalizar_dados(raw_data)
+
+      colunas = filtrar_colunas(df)
+
+      df_clima, df_cidade = transformar_colunas(df, colunas)
+
+      return df_clima, df_cidade
+
+
+
 
 #Main
 
-raw_data = abrir_arquivo()
+if __name__ == "__main__":
 
-df = normalizar_dados(raw_data)
+            df_clima, df_cidade = transformar()
 
-colunas = filtrar_colunas(df)
+            print(df_clima)
 
-df_transformado = transformar_colunas(df, colunas)
-
-print(df_transformado)
-
-print(df_transformado.dtypes)
-
-print(df_transformado.isnull().sum())
+            print(df_cidade)
