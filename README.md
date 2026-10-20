@@ -28,6 +28,7 @@ Este projeto está sendo desenvolvido como um exercício prático de aprendizado
 - PostgreSQL
 - Docker
 - requests
+- psycopg
 
 <br>
 
@@ -74,8 +75,7 @@ api_clima_brasil/
 
 ## Próximos passos
 
-- [ ] Banco de dados PostgreSQL
-- [ ] load.py
+- [ ] Arquivo Main
 - [ ] Análise com SQL
 - [ ] Revisão e possível refatoração do código
 

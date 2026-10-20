@@ -6,3 +6,8 @@ raw_data.json
 __pycache__/
 *.pyc
 *.pyo
+
+
+# Variáveis de ambiente
+
+.env

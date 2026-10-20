@@ -1,1 +1,9 @@
 raw_data.json
+
+.env
+
+.git
+
+__pycache__/
+
+*.pyc

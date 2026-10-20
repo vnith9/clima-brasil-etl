@@ -72,3 +72,6 @@ if __name__ == "__main__":
             print(df_clima)
 
             print(df_cidade)
+
+            print(df_clima.dtypes)
+            print(df_cidade.dtypes)
