@@ -101,14 +101,7 @@ def carregar_dados_banco(df_cidade, df_clima):
 
         inserir_dados_clima(conn, lista_clima)
 
-
-if __name__ == "__main__":
-
-    from transform import transformar
-
-    df_clima, df_cidade = transformar()
-
-    carregar_dados_banco(df_cidade, df_clima)
+    print("Dados carregados com sucesso!")
 
 
 

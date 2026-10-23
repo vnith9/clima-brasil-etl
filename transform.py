@@ -1,6 +1,5 @@
 import pandas as pd
 import json
-from extract import CAPITAIS
 
 
 def abrir_arquivo():
@@ -22,9 +21,9 @@ def abrir_arquivo():
           raise
 
 
-def normalizar_dados(raw_data):
+def normalizar_dados(raw_data, capitais):
       df = pd.json_normalize(raw_data)
-      df["cidade"] = list(CAPITAIS.keys())
+      df["cidade"] = list(capitais.keys())
       return df
 
 def filtrar_colunas(df):
@@ -49,29 +48,15 @@ def transformar_colunas(df, colunas):
       return df_clima, df_cidade
 
 
-def transformar():
+def transformar(capitais):
       raw_data = abrir_arquivo()
 
-      df = normalizar_dados(raw_data)
+      df = normalizar_dados(raw_data, capitais)
 
       colunas = filtrar_colunas(df)
 
       df_clima, df_cidade = transformar_colunas(df, colunas)
 
+      print("Dados transformados!")
+
       return df_clima, df_cidade
-
-
-
-
-#Main
-
-if __name__ == "__main__":
-
-            df_clima, df_cidade = transformar()
-
-            print(df_clima)
-
-            print(df_cidade)
-
-            print(df_clima.dtypes)
-            print(df_cidade.dtypes)

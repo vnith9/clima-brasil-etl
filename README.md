@@ -75,8 +75,8 @@ api_clima_brasil/
 
 ## Próximos passos
 
-- [ ] Arquivo Main
 - [ ] Análise com SQL
+- [ ] Alterar README
 - [ ] Revisão e possível refatoração do código
 
 
