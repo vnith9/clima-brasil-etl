@@ -29,12 +29,13 @@ Este projeto está sendo desenvolvido como um exercício prático de aprendizado
 - Docker
 - requests
 - psycopg
+- DBeaver
 
 <br>
 
 ## Como funciona
 
-API Open-Meteo → extract.py → transform.py → load.py → PostgreSQL
+API Open-Meteo → extract.py → transform.py → load.py → PostgreSQL → Consultas SQL
 
 1. **Extract** (`extract.py`): Consulta a API e salva a resposta bruta em raw_data.json.
 2. **Transform** (`transform.py`): Lê o JSON, achata a estrutura aninhada e gera dois DataFrames.
@@ -46,10 +47,10 @@ API Open-Meteo → extract.py → transform.py → load.py → PostgreSQL
 
 ```
 api_clima_brasil/
-├── .dockerignore                        # Arquivos e pastas ignorados pelo Docker.
-├── .gitignore                           # Arquivos e pastas ignorados pelo Git.
 ├── compose.yaml                         # Orquestra serviços e contêineres da aplicação.
+├── config.py                            # Lista das capitais.
 ├── Dockerfile                           # Define as instruções para construir a imagem da aplicação.
+├── .env.example                         # Modelo das variáveis de ambiente.
 ├── extract.py                           # Extrai os dados da API.
 ├── load.py                              # Carrega os dados no banco de dados.
 ├── main.py                              # Orquestra o pipeline.
@@ -57,6 +58,9 @@ api_clima_brasil/
 ├── README.md                            # Visão geral e instruções para o projeto.
 ├── requirements.txt                     # Dependências do projeto.
 ├── transform.py                         # Transforma os dados.
+├── sql/                                  
+   └── consultas.sql                    # Consultas de análise sobre os dados carregados.
+
 ```
 
 <br>
@@ -64,6 +68,12 @@ api_clima_brasil/
 ## Modelo de dados
 
 **Em breve**
+
+<br>
+
+## Dicionário de dados
+
+
 
 <br>
 
@@ -75,7 +85,6 @@ api_clima_brasil/
 
 ## Próximos passos
 
-- [ ] Análise com SQL
 - [ ] Alterar README
 - [ ] Revisão e possível refatoração do código
 
