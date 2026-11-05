@@ -73,7 +73,26 @@ api_clima_brasil/
 
 ## Dicionário de dados
 
+### Tabela `clima`
 
+| Coluna | Tipo | Descrição | Unidade |
+|---|---|---|---|
+| `id` | SERIAL | Chave primária artificial | |
+| `cidade_id` | INT | Chave estrangeira apontando para `cidade.id` | |
+| `data` | DATE | Data do registro no formato AAAA-MM-DD, representando um dia inteiro | |
+| `temperatura_media_c` | FLOAT | Temperatura média diária | Grau Celsius - °C |
+| `precipitacao_mm` | FLOAT | Soma de precipitação diária | Milímetro - mm |
+| `duracao_luz_dia_h` | FLOAT | Duração de luz solar no dia (em horas), calculada entre o nascer do sol e o pôr do sol | Hora - h |
+| `radiacao_solar_mj_m2` | FLOAT | Soma de radiação solar diária | Megajoule por metro quadrado - MJ/m² |
+
+### Tabela `cidade`
+
+| Coluna | Tipo | Descrição |
+|---|---|---|
+| `id` | SERIAL | Chave primária artificial |
+| `nome` | VARCHAR | Nome da cidade |
+| `latitude` | FLOAT | Latitude da cidade em graus decimais |
+| `longitude` | FLOAT | Longitude da cidade em graus decimais |
 
 <br>
 
